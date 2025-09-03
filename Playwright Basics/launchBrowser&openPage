@@ -1,0 +1,22 @@
+# Import sync_playwright for synchronous API
+from playwright.sync_api import sync_playwright
+
+# Main entry point for Playwright
+with sync_playwright() as p:
+    # Launch a Chromium browser (headless=False means you can see it)
+    browser = p.chromium.launch(headless=False)
+
+    # Create a new browser page (like opening a new tab)
+    page = browser.new_page()
+
+    # Go to Google homepage
+    page.goto("https://www.google.com")
+
+    # Print the page title (useful for verification in tests)
+    print("Page Title:", page.title())
+
+    # Wait for 3 seconds so we can see the page
+    page.wait_for_timeout(3000)
+
+    # Close the browser after test
+    browser.close()
